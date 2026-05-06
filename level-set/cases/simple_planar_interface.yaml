@@ -1,0 +1,10 @@
+case:
+  name: simple_planar_interface
+
+mesh:
+  length: 6 # in um
+  finite_element_size: 1e-3 # in um
+
+interface:
+  position: 0.2 # in um
+  eta: 0.1 # in um
