@@ -2,9 +2,9 @@ case:
   name: simple_planar_interface
 
 mesh:
-  length: 6 # in um
-  finite_element_size: 1e-3 # in um
+  nx: 6e3 # Number of finite element
+  dx: 1e-3 # Size of finite element, in um 
 
 interface:
-  position: 0.2 # in um
-  eta: 0.1 # in um
+  interface_position: 0.2 # in um
+  eta: 0.1 # Interface width, in um
