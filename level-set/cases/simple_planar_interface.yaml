@@ -2,8 +2,8 @@ case:
   name: simple_planar_interface
 
 mesh:
-  nx: 6e3 # Number of finite element
-  dx: 1e-3 # Size of finite element, in um 
+  nx: 5 # Number of finite element
+  dx: 1.0e-3 # Size of finite element, in um 
 
 interface:
   interface_position: 0.2 # in um
