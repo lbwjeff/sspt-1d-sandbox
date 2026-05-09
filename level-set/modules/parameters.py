@@ -3,20 +3,25 @@ from pathlib import Path
 
 import yaml
 
+
 @dataclass
 class MeshParameters:
     nx: int # Number of finite element
     dx: float # Size of finite element
 
+
 @dataclass
 class InterfaceParameters:
-    interface_position: float
-    eta: float # Interface width
+    sites: list[float] # Voronoi site positions to generate the interface
+    precision: float # Beloning precision for distance calculation
+    eta: float # Diffuse interface width
+
 
 @dataclass
 class SimulationParameters:
     mesh: MeshParameters
     interface: InterfaceParameters
+
 
 def load_parameters(yaml_path: str | Path)-> SimulationParameters:
     """

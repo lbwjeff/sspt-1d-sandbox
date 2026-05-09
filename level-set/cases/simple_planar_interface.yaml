@@ -6,5 +6,7 @@ mesh:
   dx: 1.0e-3 # Size of finite element, in um 
 
 interface:
-  interface_position: 0.2 # in um
-  eta: 0.1 # Interface width, in um
+  sites: [1.0e-3, 3.0e-3] # Voronoi site positions to generate the interface, in um
+  precision: 1.0e-7 # Beloning precision for distance calculation, in um
+
+  eta: 0.1 # Diffuse interface width, in um
