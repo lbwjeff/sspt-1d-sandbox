@@ -4,6 +4,7 @@ import numpy as np
 from modules.parameters import load_parameters
 from modules.mesh import build_uniform_1d_mesh
 from modules.calcul_distances import VoronoiSites1D, calcul_distances_1d
+from modules.update_appartients import update_appartients_from_distances
 
 def main() -> None:
 
@@ -34,6 +35,11 @@ def main() -> None:
         precision=precision,
     )
 
+    # Update Appartients
+    updated_appartients = update_appartients_from_distances(
+        result.distances
+    )
+
     print("Interface position:", result.interface_position, "um")
 
     table = np.column_stack(
@@ -41,8 +47,8 @@ def main() -> None:
             mesh.nodes,
             result.distances[:, 0],
             result.distances[:, 1],
-            result.appartients[:, 0],
-            result.appartients[:, 1],
+            updated_appartients[:, 0],
+            updated_appartients[:, 1],
         ]        
     )
 
