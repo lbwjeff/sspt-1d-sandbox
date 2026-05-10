@@ -36,6 +36,7 @@ Outputs:
 """
 
 from dataclasses import dataclass
+from modules.numerics import REAL_DTYPE
 
 import numpy as np
 
@@ -55,7 +56,7 @@ class VoronoiSites1D:
         Compute the Voronoi interface position.
         """
 
-        return 0.5 * (self.x_left + self.x_right)
+        return REAL_DTYPE(0.5) * (self.x_left + self.x_right)
 
 
 @dataclass
@@ -110,7 +111,7 @@ def calcul_distances_1d(
     """
 
     # Convert coordinates into a NumPy array
-    x = np.asarray(coordinates, dtype=float)
+    x = np.asarray(coordinates, dtype=REAL_DTYPE)
 
     if x.ndim != 1:
         raise ValueError(
@@ -121,12 +122,13 @@ def calcul_distances_1d(
     x_interface = sites.interface_position
 
     # Signed distance array
-    distances = np.empty((x.size, 2), dtype=float)
+    distances = np.empty((x.size, 2), dtype=REAL_DTYPE)
     distances[:, 0] = x_interface - x
     distances[:, 1] = x - x_interface
 
     # Beloning relation
-    appartients = (distances > -precision).astype(float)
+    precision = REAL_DTYPE(precision)
+    appartients = (distances > -precision).astype(REAL_DTYPE)
 
     return CalculDistancesResult(
         distances=distances,

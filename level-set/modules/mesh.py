@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from modules.parameters import MeshParameters
+from modules.numerics import REAL_DTYPE, INT_DTYPE
 
 
 @dataclass
@@ -25,23 +26,28 @@ def build_uniform_1d_mesh(mesh_params: MeshParameters) -> Mesh1D:
     """
 
     nx = int(mesh_params.nx)
-    dx = float(mesh_params.dx)
+    dx = REAL_DTYPE(mesh_params.dx)
 
-    length = nx * dx
+    length = REAL_DTYPE(nx) * dx
 
-    nodes = np.linspace(0.0, length, nx + 1)
+    nodes = np.linspace(
+            REAL_DTYPE(0.0), 
+            length, 
+            nx + 1,
+            dtype=REAL_DTYPE
+    )
 
     # Finite element connectivity
     # Node indeces for each element
     elements = np.column_stack(
         [
-            np.arange(0, nx, dtype=int),
-            np.arange(1, nx + 1, dtype=int),
+            np.arange(0, nx, dtype=INT_DTYPE),
+            np.arange(1, nx + 1, dtype=INT_DTYPE),
         ]
     )
 
     # Element center
-    centers = 0.5 * (nodes[:-1] + nodes[1:])
+    centers = REAL_DTYPE(0.5) * (nodes[:-1] + nodes[1:])
 
     return Mesh1D(
         nodes=nodes,
